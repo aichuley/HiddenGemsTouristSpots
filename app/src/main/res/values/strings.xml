@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HiddenGemsTouristSpots</string>
+    <string name="dog_age">Summary: %1$s</string>
+    <string name="dog_hobbies">Rating: %1$s</string>
+    <string name="vertical">Vertical</string>
+    <string name="horizontal">Horizontal</string>
+    <string name="grid">Grid</string>
 </resources>
