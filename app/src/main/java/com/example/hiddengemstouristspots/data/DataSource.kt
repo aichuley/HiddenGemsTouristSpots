@@ -43,5 +43,6 @@ object DataSource {
 }
 
 fun helper(newDestination: TouristSpot){
+    //create tourist spot here
     DataSource.spot.add(newDestination)
 }
