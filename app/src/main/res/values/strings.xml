@@ -5,4 +5,9 @@
     <string name="vertical">Vertical</string>
     <string name="horizontal">Horizontal</string>
     <string name="grid">Grid</string>
+    <string name="get_directions">Get directions</string>
+    <string name="hidden_gems">Hidden Gems</string>
+    <string name="add_hidden_gem">Add hidden gem</string>
+    <string name="view_hidden_gems">View Hidden Gems</string>
+    <string name="settings">Settings</string>
 </resources>

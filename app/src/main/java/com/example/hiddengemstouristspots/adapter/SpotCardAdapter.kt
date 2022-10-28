@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hiddengemstouristspots.data.DataSource.spot
 import com.example.hiddengemstouristspots.model.TouristSpot
 import com.example.hiddengemstouristspots.R
+import com.example.hiddengemstouristspots.RecyclerViewInterface
 
 
 /**
@@ -20,6 +21,7 @@ import com.example.hiddengemstouristspots.R
  */
 class DogCardAdapter(
     private val context: Context?,
+    private val recyclerViewInterface: RecyclerViewInterface
 ): RecyclerView.Adapter<DogCardAdapter.DogCardViewHolder>() {
 
     // Retrieve list of data from DataSource
@@ -57,10 +59,13 @@ class DogCardAdapter(
         //mains in the video game for the current position
         val resources = context?.resources
         val item = data[position]
+        holder.itemView.setOnClickListener{
+                    recyclerViewInterface.onItemClick(position)
+        }
         holder.image.setImageResource(item.imageResourceId)
         holder.name.text = item.name
         //Pass string resource to game type and mains text
-        holder.age.text = resources?.getString(R.string.dog_age, item.summary)
+        holder.age.text = resources?.getString(R.string.dog_age, item.short_summary)
         holder.hobby.text = resources?.getString(R.string.dog_hobbies, item.rating)
     }
 }

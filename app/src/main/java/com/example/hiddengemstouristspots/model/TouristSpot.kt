@@ -8,6 +8,7 @@ import androidx.annotation.DrawableRes
 data class TouristSpot(
     @DrawableRes val imageResourceId: Int,
     val name: String,
-    val summary: String,
-    val rating: String
+    val short_summary: String,
+    val rating: String,
+    val long_summary: String
 )

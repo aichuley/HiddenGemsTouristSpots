@@ -3,7 +3,6 @@ package com.example.hiddengemstouristspots
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat.startActivity
 import com.example.hiddengemstouristspots.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     //main
@@ -16,13 +15,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.fab.setOnClickListener { launchVertical() }
+        binding.viewHiddenGemsButton.setOnClickListener { launchVertical() }
     }
 
     private fun launchVertical() {
         listIntent = Intent(this, VerticalListActivity::class.java)
         startActivity(listIntent)
     }
-}
 
-// Deepika's commit
+}
