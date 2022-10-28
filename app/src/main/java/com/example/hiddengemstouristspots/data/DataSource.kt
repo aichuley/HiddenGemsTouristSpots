@@ -42,7 +42,7 @@ object DataSource {
     )
 }
 
-fun helper(newDestination: TouristSpot){
+fun addExperience(photo: Int, name: String, summaries: List<String>, rating: String){
     //create tourist spot here
-    DataSource.spot.add(newDestination)
+    DataSource.spot.add(TouristSpot(photo, name, summaries.get(0), rating, summaries.get(1)))
 }
