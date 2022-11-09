@@ -2,6 +2,7 @@ package com.example.hiddengemstouristspots.data
 
 import com.example.hiddengemstouristspots.model.TouristSpot
 import com.example.hiddengemstouristspots.R
+import com.example.hiddengemstouristspots.data.DataSource.spot
 
 /**
  * An object to generate a static list of dogs
@@ -17,6 +18,7 @@ object DataSource {
             "College of Texas",
             "5/5 stars",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            , "Austin"
         ),
         TouristSpot(
             R.drawable.zilker_park,
@@ -24,6 +26,7 @@ object DataSource {
             "Sprawling green space with recreation",
             "4.8/5 stars",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            , "Austin"
         ),
         TouristSpot(
             R.drawable.capitol,
@@ -31,6 +34,7 @@ object DataSource {
             "Home to the state legislature",
             "4.7/5 stars",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            , "Austin"
         ),
         TouristSpot(
             R.drawable.blanton,
@@ -38,11 +42,16 @@ object DataSource {
             "Art collection of University of Texas",
             "4.6/5 stars",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            , "Austin"
         ),
     )
 }
 
-fun addExperience(photo: Int, name: String, summaries: List<String>, rating: String){
+fun addExperience(photo: Int, name: String, summaries: List<String>, rating: String, city: String){
     //create tourist spot here
-    DataSource.spot.add(TouristSpot(photo, name, summaries[0], rating, summaries[1]))
+    spot.add(TouristSpot(photo, name, summaries[0], rating, summaries[1], city))
+}
+
+fun get_currentSpots():  MutableList<TouristSpot> {
+    return spot
 }

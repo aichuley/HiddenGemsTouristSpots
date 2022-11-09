@@ -10,5 +10,6 @@ data class TouristSpot(
     val name: String,
     val short_summary: String,
     val rating: String,
-    val long_summary: String
+    val long_summary: String,
+    val city: String,
 )
