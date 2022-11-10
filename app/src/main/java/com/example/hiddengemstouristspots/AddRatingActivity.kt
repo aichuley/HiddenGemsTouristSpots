@@ -1,8 +1,12 @@
 package com.example.hiddengemstouristspots
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.Spanned
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,27 +31,9 @@ class AddRatingActivity : AppCompatActivity() {
 
         // Assigning filters
         editText.filters = arrayOf<InputFilter>(MinMaxFilter(0, 5))
-//
-//        fun isValidRating(): Boolean{
-//            val stringInTextField = binding.ratingScore.text.toString()
-//            val rating = stringInTextField.toInt()
-//            if(rating !in 0..5){
-//                //print
-//                val text = "Please insert a rating between 0 and 5!"
-//                val duration = Toast.LENGTH_LONG
-//                val toast = Toast.makeText(applicationContext, text, duration)
-//                toast.show()
-//                return false
-//            }
-//            else{
-//                return true
-//            }
-//        }
 
 
         fun get_rating(): Int{
-
-
             val stringInTextField = binding.ratingScore.text.toString()
             val rating = stringInTextField.toInt()
             return rating
@@ -62,7 +48,29 @@ class AddRatingActivity : AppCompatActivity() {
         fun get_review(): String {
             return binding.reviewVal.text.toString()
         }
+
+         fun ObjectAnimator.disableViewDuringAnimation(view: View) {
+
+            addListener(object: AnimatorListenerAdapter(){
+                override fun onAnimationStart(animation: Animator?) {
+                    view.isEnabled = false
+                }
+
+                override fun onAnimationEnd(animation: Animator?) {
+                    view.isEnabled = true
+                }
+            })
+        }
+
+        fun rotater() {
+            val animator = ObjectAnimator.ofFloat(binding.submitRating, View.ROTATION,-360f,0f)
+            animator.duration = 1000
+            animator.disableViewDuringAnimation(binding.submitRating)
+            animator.start()
+        }
+
         binding.submitRating.setOnClickListener{
+            rotater()
             var rating = get_rating()
             var city = get_city()
             var experienceName = get_place()
@@ -79,9 +87,6 @@ class AddRatingActivity : AppCompatActivity() {
 
     }
 
-
-
-    //override fun onItemClick()
 
     // Custom class to define min and max for the edit text
     inner class MinMaxFilter() : InputFilter {

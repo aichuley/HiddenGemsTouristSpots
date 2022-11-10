@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var listIntent: Intent
     private lateinit var reviewItent: Intent
+    private lateinit var settingsIntent: Intent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding.viewHiddenGemsButton.setOnClickListener { launchVertical() }
 
         binding.addHiddenGemButton.setOnClickListener { launchHelper() }
+        binding.settingsButton.setOnClickListener { launchSettings() }
 
 
     }
@@ -32,5 +34,11 @@ class MainActivity : AppCompatActivity() {
         reviewItent = Intent(this, AddRatingActivity::class.java)
         startActivity(reviewItent)
     }
+
+    private fun launchSettings() {
+        settingsIntent = Intent(this, SettingsActivity::class.java)
+        startActivity(settingsIntent)
+    }
+
 
 }

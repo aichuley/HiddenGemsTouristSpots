@@ -20,45 +20,59 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/world">
+
+    >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/view_hidden_gems_button"
-        android:textSize="50sp"
         android:layout_marginBottom="20dp"
-        android:text="@string/hidden_gems"/>
+        android:background="#B9FFFFFF"
+        android:backgroundTint="#82B1FF"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="@string/hidden_gems"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/view_hidden_gems_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/add_hidden_gem_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="casual"
         android:minWidth="250dp"
         android:text="@string/add_hidden_gem"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/view_hidden_gems_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="casual"
         android:minWidth="250dp"
         android:text="@string/view_hidden_gems"
-        app:layout_constraintStart_toStartOf="@id/add_hidden_gem_button"
-        app:layout_constraintBottom_toTopOf="@id/add_hidden_gem_button"/>
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/add_hidden_gem_button"
+        app:layout_constraintStart_toStartOf="@id/add_hidden_gem_button" />
 
     <Button
         android:id="@+id/settings_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="casual"
         android:minWidth="250dp"
         android:text="@string/settings"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/add_hidden_gem_button"
-        app:layout_constraintTop_toBottomOf="@id/add_hidden_gem_button"/>
+        app:layout_constraintTop_toBottomOf="@id/add_hidden_gem_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
