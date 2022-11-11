@@ -1,10 +1,11 @@
 package com.example.hiddengemstouristspots
 
+import AppViewModel
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.example.hiddengemstouristspots.adapter.DogCardAdapter
-import com.example.hiddengemstouristspots.data.DataSource
 import com.example.hiddengemstouristspots.databinding.ActivityVerticalListBinding
 import com.example.hiddengemstouristspots.model.TouristSpot
 
@@ -12,15 +13,18 @@ class VerticalListActivity : AppCompatActivity(), RecyclerViewInterface {
 
     private lateinit var binding: ActivityVerticalListBinding
     private lateinit var itemIntent: Intent
-    private val data: List<TouristSpot> = DataSource.spot
+    private lateinit var data: List<TouristSpot>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val viewModel: AppViewModel by viewModels()
+        data = viewModel.getCurrentSpots()
         super.onCreate(savedInstanceState)
         binding = ActivityVerticalListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.verticalRecyclerView.adapter = DogCardAdapter(
-            applicationContext, this
+            applicationContext, this,
+            viewModel
         )
 
         // Specify fixed size to improve performance

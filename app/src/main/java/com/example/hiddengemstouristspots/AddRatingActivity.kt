@@ -1,5 +1,6 @@
 package com.example.hiddengemstouristspots
 
+import AppViewModel
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
@@ -9,14 +10,14 @@ import android.text.Spanned
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.hiddengemstouristspots.data.addExperience
-import com.example.hiddengemstouristspots.data.get_currentSpots
 import com.example.hiddengemstouristspots.databinding.AddRatingBinding
 
 
 class AddRatingActivity : AppCompatActivity() {
 
+    private val viewModel: AppViewModel by viewModels()
     private lateinit var binding: AddRatingBinding
  //   private lateinit var listIntent: Intent
 
@@ -80,7 +81,6 @@ class AddRatingActivity : AppCompatActivity() {
                 var rating = get_rating()
                 var city = get_city()
                 var experienceName = get_place()
-                var currSpots =  get_currentSpots()
                 var review = get_review()
 
                 val toast = Toast.makeText(applicationContext, "Thank you for submitting", Toast.LENGTH_LONG)
@@ -92,7 +92,7 @@ class AddRatingActivity : AppCompatActivity() {
                     shortened = review.substring(0, 14) + "..."
                 }
                 var list = listOf(shortened, review)
-                addExperience(1, experienceName, list, rating.toString(), city)
+                viewModel.addExperience(1, experienceName, list, rating.toString(), city)
 
             }
 

@@ -1,5 +1,6 @@
 package com.example.hiddengemstouristspots
 
+import AppViewModel
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
@@ -7,12 +8,14 @@ import android.animation.PropertyValuesHolder
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.hiddengemstouristspots.data.set_City
 import com.google.android.material.textfield.TextInputEditText
 
 
 class SettingsActivity: AppCompatActivity() {
+
+    private val viewModel: AppViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +48,7 @@ class SettingsActivity: AppCompatActivity() {
         submit.setOnClickListener {
             scaler()
             var newCity = get_city()
-            set_City(newCity)
+            viewModel.setCity(newCity)
         }
     }
 

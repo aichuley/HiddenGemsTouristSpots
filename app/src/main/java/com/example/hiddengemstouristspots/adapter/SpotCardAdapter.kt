@@ -1,6 +1,7 @@
 package com.example.hiddengemstouristspots.adapter
 
 
+import AppViewModel
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
-import com.example.hiddengemstouristspots.data.DataSource.spot
 import com.example.hiddengemstouristspots.model.TouristSpot
 import com.example.hiddengemstouristspots.R
 import com.example.hiddengemstouristspots.RecyclerViewInterface
@@ -21,11 +20,12 @@ import com.example.hiddengemstouristspots.RecyclerViewInterface
  */
 class DogCardAdapter(
     private val context: Context?,
-    private val recyclerViewInterface: RecyclerViewInterface
+    private val recyclerViewInterface: RecyclerViewInterface,
+    private val viewModel: AppViewModel
 ): RecyclerView.Adapter<DogCardAdapter.DogCardViewHolder>() {
 
     // Retrieve list of data from DataSource
-    private val data: List<TouristSpot> = spot
+    private val data: List<TouristSpot> = viewModel.getCurrentSpots()
     /**
      * Initialize view elements
      */
