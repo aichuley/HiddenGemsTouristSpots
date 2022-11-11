@@ -70,18 +70,31 @@ class AddRatingActivity : AppCompatActivity() {
         }
 
         binding.submitRating.setOnClickListener{
-            rotater()
-            var rating = get_rating()
-            var city = get_city()
-            var experienceName = get_place()
-            var currSpots =  get_currentSpots()
-            var review = get_review()
-            var shortened = review.toString()
-            if(review.length >= 15){
-                shortened = review.substring(0, 14) + "..."
+
+            if(binding.cityVal.text.toString().isEmpty() ||  binding.spotVal.text.toString().isEmpty() || binding.reviewVal.text.toString().isEmpty()){
+                val toast = Toast.makeText(applicationContext, "Please Fill Out All Fields", Toast.LENGTH_LONG)
+                toast.show()
             }
-            var list = listOf(shortened, review)
-            addExperience(1, experienceName, list, rating.toString(), city)
+            else{
+                rotater()
+                var rating = get_rating()
+                var city = get_city()
+                var experienceName = get_place()
+                var currSpots =  get_currentSpots()
+                var review = get_review()
+
+                val toast = Toast.makeText(applicationContext, "Thank you for submitting", Toast.LENGTH_LONG)
+                toast.show()
+
+
+                var shortened = review.toString()
+                if(review.length >= 15){
+                    shortened = review.substring(0, 14) + "..."
+                }
+                var list = listOf(shortened, review)
+                addExperience(1, experienceName, list, rating.toString(), city)
+
+            }
 
         }
 
