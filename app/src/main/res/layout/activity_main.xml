@@ -23,8 +23,6 @@
     tools:context=".MainActivity"
     android:background="@drawable/world">
 
-    >
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,18 +38,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/add_hidden_gem_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="casual"
-        android:minWidth="250dp"
-        android:text="@string/add_hidden_gem"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/view_hidden_gems_button"
@@ -61,8 +47,10 @@
         android:minWidth="250dp"
         android:text="@string/view_hidden_gems"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/add_hidden_gem_button"
-        app:layout_constraintStart_toStartOf="@id/add_hidden_gem_button" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/settings_button"
@@ -72,7 +60,7 @@
         android:minWidth="250dp"
         android:text="@string/settings"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/add_hidden_gem_button"
-        app:layout_constraintTop_toBottomOf="@id/add_hidden_gem_button" />
+        app:layout_constraintStart_toStartOf="@+id/view_hidden_gems_button"
+        app:layout_constraintTop_toBottomOf="@id/view_hidden_gems_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

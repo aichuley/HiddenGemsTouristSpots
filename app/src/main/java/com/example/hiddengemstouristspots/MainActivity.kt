@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.viewHiddenGemsButton.setOnClickListener { launchVertical() }
 
-        binding.addHiddenGemButton.setOnClickListener { launchHelper() }
         binding.settingsButton.setOnClickListener { launchSettings() }
 
 
@@ -30,15 +29,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(listIntent)
     }
 
-    private fun launchHelper() {
-        reviewItent = Intent(this, AddRatingActivity::class.java)
-        startActivity(reviewItent)
-    }
-
     private fun launchSettings() {
         settingsIntent = Intent(this, SettingsActivity::class.java)
         startActivity(settingsIntent)
     }
-
-
 }

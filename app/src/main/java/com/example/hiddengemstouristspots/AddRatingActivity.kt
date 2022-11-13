@@ -1,25 +1,45 @@
 package com.example.hiddengemstouristspots
 
-import AppViewModel
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.app.Activity
+import android.content.Intent
+import android.content.res.Resources
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.InputFilter
 import android.text.Spanned
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hiddengemstouristspots.databinding.AddRatingBinding
 
 
 class AddRatingActivity : AppCompatActivity() {
 
-    private val viewModel: AppViewModel by viewModels()
     private lateinit var binding: AddRatingBinding
- //   private lateinit var listIntent: Intent
+    private lateinit var newImage: Uri
+
+    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result ->
+        if(result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            binding.previewImage.setImageURI(data?.data)
+            newImage = data?.data!!
+
+            val contentResolver = applicationContext.contentResolver
+
+            val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+// Check for the freshest data.
+            contentResolver.takePersistableUriPermission(newImage, takeFlags)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +52,11 @@ class AddRatingActivity : AppCompatActivity() {
 
         // Assigning filters
         editText.filters = arrayOf<InputFilter>(MinMaxFilter(0, 5))
+
+        binding.selectImageButton.setOnClickListener{
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            resultLauncher.launch(intent)
+        }
 
 
         fun get_rating(): Int{
@@ -71,17 +96,17 @@ class AddRatingActivity : AppCompatActivity() {
         }
 
         binding.submitRating.setOnClickListener{
-
+            val replyIntent = Intent()
             if(binding.cityVal.text.toString().isEmpty() ||  binding.spotVal.text.toString().isEmpty() || binding.reviewVal.text.toString().isEmpty()){
                 val toast = Toast.makeText(applicationContext, "Please Fill Out All Fields", Toast.LENGTH_LONG)
                 toast.show()
             }
             else{
                 rotater()
-                var rating = get_rating()
-                var city = get_city()
-                var experienceName = get_place()
-                var review = get_review()
+                val rating = get_rating()
+                val city = get_city()
+                val experienceName = get_place()
+                val review = get_review()
 
                 val toast = Toast.makeText(applicationContext, "Thank you for submitting", Toast.LENGTH_LONG)
                 toast.show()
@@ -91,14 +116,28 @@ class AddRatingActivity : AppCompatActivity() {
                 if(review.length >= 15){
                     shortened = review.substring(0, 14) + "..."
                 }
-                var list = listOf(shortened, review)
-                viewModel.addExperience(1, experienceName, list, rating.toString(), city)
+
+
+                replyIntent.putExtra("IMAGE_ID", 0)
+                replyIntent.putExtra("IMAGE_URI", newImage.toString())
+                replyIntent.putExtra("NAME", experienceName)
+                replyIntent.putExtra("SHORT_REVIEW", shortened)
+                replyIntent.putExtra("RATING", rating.toString())
+                replyIntent.putExtra("LONG_REVIEW", review)
+                replyIntent.putExtra("CITY", city)
+                setResult(Activity.RESULT_OK, replyIntent)
+                finish()
 
             }
 
+
+
         }
 
+
     }
+
+
 
 
     // Custom class to define min and max for the edit text

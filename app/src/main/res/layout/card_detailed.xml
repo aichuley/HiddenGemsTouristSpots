@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/long_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/get_directions"
+        android:text="More info"
         android:layout_marginTop="40dp"/>
 
 

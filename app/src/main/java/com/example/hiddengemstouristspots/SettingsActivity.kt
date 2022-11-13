@@ -1,6 +1,5 @@
 package com.example.hiddengemstouristspots
 
-import AppViewModel
 import android.Manifest
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -27,6 +26,9 @@ import com.example.android.whileinuselocation.ForegroundOnlyLocationService
 import com.example.android.whileinuselocation.SharedPreferenceUtil
 import com.example.android.whileinuselocation.toText
 import com.google.android.material.snackbar.Snackbar
+import com.example.hiddengemstouristspots.data.SpotViewModel
+import com.example.hiddengemstouristspots.data.SpotViewModelFactory
+import com.example.hiddengemstouristspots.data.SpotsApplication
 import com.google.android.material.textfield.TextInputEditText
 import java.util.*
 
@@ -36,7 +38,9 @@ private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
 
 class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private val viewModel: AppViewModel by viewModels()
+    private val spotViewModel: SpotViewModel by viewModels {
+        SpotViewModelFactory((application as SpotsApplication).repository)
+    }
 
     private var foregroundOnlyLocationServiceBound = false
 
@@ -125,7 +129,8 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
         submit.setOnClickListener {
             scaler()
             var newCity = get_city()
-            viewModel.setCity(newCity)
+            TODO()
+//            spotViewModel.changeUserCity(newCity)
         }
     }
 

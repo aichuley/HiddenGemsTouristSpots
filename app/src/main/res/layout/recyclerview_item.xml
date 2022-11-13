@@ -32,7 +32,7 @@
 
         <!-- name of game -->
         <TextView
-            android:id="@+id/dog_name"
+            android:id="@+id/spot_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -40,12 +40,12 @@
             android:layout_marginBottom="16dp"
             android:text="Name"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:layout_constraintBottom_toTopOf="@id/dog_age"
+            app:layout_constraintBottom_toTopOf="@id/spot_summary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spot_image" />
         <!-- game type -->
         <TextView
-            android:id="@+id/dog_age"
+            android:id="@+id/spot_summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -56,7 +56,7 @@
             app:layout_constraintStart_toStartOf="parent" />
         <!-- the main -->
         <TextView
-            android:id="@+id/dog_hobby"
+            android:id="@+id/spot_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"

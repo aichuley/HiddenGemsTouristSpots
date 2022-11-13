@@ -1,72 +1,68 @@
 package com.example.hiddengemstouristspots.adapter
 
 
-import AppViewModel
-import android.content.Context
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hiddengemstouristspots.model.TouristSpot
 import com.example.hiddengemstouristspots.R
 import com.example.hiddengemstouristspots.RecyclerViewInterface
+import com.example.hiddengemstouristspots.data.Spot
 
+class SpotCardAdapter(private val recyclerViewInterface: RecyclerViewInterface) : ListAdapter<Spot, SpotCardAdapter.SpotViewHolder>(SPOTS_COMPARATOR) {
 
-/**
- * Adapter to inflate the appropriate list item layout and populate the view with information
- * from the appropriate data source
- */
-class DogCardAdapter(
-    private val context: Context?,
-    private val recyclerViewInterface: RecyclerViewInterface,
-    private val viewModel: AppViewModel
-): RecyclerView.Adapter<DogCardAdapter.DogCardViewHolder>() {
-
-    // Retrieve list of data from DataSource
-    private val data: List<TouristSpot> = viewModel.getCurrentSpots()
-    /**
-     * Initialize view elements
-     */
-    class DogCardViewHolder(view: View?): RecyclerView.ViewHolder(view!!) {
-        // set up the view elements by finding the correct ids for each
-        // component
-        val image: ImageView = view!!.findViewById(R.id.spot_image)
-        val name: TextView = view!!.findViewById(R.id.dog_name)
-        val age: TextView = view!!.findViewById(R.id.dog_age)
-        val hobby: TextView = view!!.findViewById(R.id.dog_hobby)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpotViewHolder {
+        return SpotViewHolder.create(parent)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogCardViewHolder {
-
-        //If the grid layout enum is chosen use the grid_list_item
-        //otherwise use the vertical_horizontal_list_item
-        val adapterLayout = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.recyclerview_item, parent, false)
-
-
-        //pass in the correct inflated layout
-        return DogCardViewHolder(adapterLayout)
+    override fun onBindViewHolder(holder: SpotViewHolder, position: Int) {
+        val current = getItem(position)
+        holder.bind(current, position, recyclerViewInterface)
     }
 
-    //passing in size of dataset
-    override fun getItemCount(): Int = data.size
+    class SpotViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val image: ImageView = itemView.findViewById(R.id.spot_image)
+        private val name: TextView = itemView.findViewById(R.id.spot_name)
+        private val summary: TextView = itemView.findViewById(R.id.spot_summary)
+        private val rating: TextView = itemView.findViewById(R.id.spot_rating)
 
-    override fun onBindViewHolder(holder: DogCardAdapter.DogCardViewHolder, position: Int) {
-
-        //retrieve and set the image, text about the game type, and the
-        //mains in the video game for the current position
-        val resources = context?.resources
-        val item = data[position]
-        holder.itemView.setOnClickListener{
-                    recyclerViewInterface.onItemClick(position)
+        fun bind(spot: Spot?, position: Int, recyclerViewInterface: RecyclerViewInterface) {
+            if(spot!!.imageResourceId > 0)
+                image.setImageResource(spot.imageResourceId)
+            else
+                image.setImageURI(Uri.parse(spot.imageUri))
+            name.text = spot.name
+            summary.text = spot.short_summary
+            rating.text = spot.rating
+            itemView.setOnClickListener{recyclerViewInterface.onItemClick(position)}
         }
-        holder.image.setImageResource(item.imageResourceId)
-        holder.name.text = item.name
-        //Pass string resource to game type and mains text
-        holder.age.text = resources?.getString(R.string.dog_age, item.short_summary)
-        holder.hobby.text = resources?.getString(R.string.dog_hobbies, item.rating)
+
+        companion object {
+            fun create(parent: ViewGroup): SpotViewHolder {
+                val view: View = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.recyclerview_item, parent, false)
+                return SpotViewHolder(view)
+            }
+        }
+    }
+
+    companion object {
+        private val SPOTS_COMPARATOR = object : DiffUtil.ItemCallback<Spot>() {
+            override fun areItemsTheSame(oldItem: Spot, newItem: Spot): Boolean {
+                return oldItem === newItem
+            }
+
+            override fun areContentsTheSame(oldItem: Spot, newItem: Spot): Boolean {
+                return oldItem.name == newItem.name && oldItem.short_summary == newItem.short_summary &&
+                        oldItem.rating == newItem.rating && oldItem.long_summary == newItem.long_summary &&
+                        oldItem.city == newItem.city
+            }
+        }
     }
 }
-
