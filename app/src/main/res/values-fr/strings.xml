@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Joyaux cachés des sites touristiques</string>
+    <string name="dog_age">Sommaire: %1$s</string>
+    <string name="dog_hobbies">Évaluation: %1$s</string>
+    <string name="vertical">Vertical</string>
+    <string name="horizontal">Horizontal</string>
+    <string name="grid">la grille</string>
+    <string name="get_directions">Obtenir des directions</string>
+    <string name="hidden_gems">Joyaux cachés</string>
+    <string name="add_hidden_gem">Ajouter un joyau caché</string>
+    <string name="view_hidden_gems">Voir les joyaux cachés</string>
+    <string name="settings">Réglages</string>
+
+</resources>
