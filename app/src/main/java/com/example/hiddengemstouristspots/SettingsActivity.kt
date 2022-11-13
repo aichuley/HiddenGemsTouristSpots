@@ -185,8 +185,14 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
     }
 
     fun get_city(): String{
-        val city = findViewById<TextInputEditText>(R.id.settingsCity)
-        return city.toString()
+        val city2 = findViewById<TextInputEditText>(R.id.settingsCity)
+
+        val city1 = findViewById<TextView>(R.id.output_text_view)
+
+        if(city2 == null){
+            return city1.toString()
+        }
+        return city2.toString()
     }
 
     private fun foregroundPermissionApproved(): Boolean {
