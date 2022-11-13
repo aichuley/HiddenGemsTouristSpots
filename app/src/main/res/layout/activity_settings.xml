@@ -7,17 +7,18 @@
     android:id="@+id/activity_settings"
     >
 
+
     <TextView
         android:id="@+id/setCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="149dp"
-        android:layout_marginBottom="44dp"
         android:text="Set Your City"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/settingsCity"
+        android:textStyle="italic"
+        android:fontFamily="sans-serif-black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,42 +26,62 @@
 
     <Button
         android:id="@+id/foreground_only_location_button"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="16dp"
-        android:text="start_location_updates_button_text"
+        android:text="Share location with Hidden Gems?"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/settingsCity"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/setCity"
+        app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Or Enter City"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/settingsCity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/output_text_view"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/settingsCity"
         android:layout_width="259dp"
         android:layout_height="78dp"
-        android:layout_marginTop="32dp"
         android:hint="Type A City"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:fontFamily="sans-serif-black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.671"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setCity"
-        tools:ignore="MissingConstraints" />
+
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="416dp" />
 
     <Switch
         android:id="@+id/darkModeSwitch"
         android:layout_width="172dp"
         android:layout_height="51dp"
         android:layout_marginStart="132dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="133dp"
-        android:layout_marginBottom="32dp"
         android:text="dark/light mode"
+        android:textSize="17sp"
+        android:textStyle="italic"
+        android:fontFamily="sans-serif-black"
         app:layout_constraintBottom_toTopOf="@+id/submitNewCity"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsCity" />
 
@@ -69,22 +90,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="158dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="159dp"
         android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/darkModeSwitch" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsCity" />
 
     <TextView
+        android:id="@+id/output_text_view"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/submitNewCity"
+        android:layout_marginTop="34dp"
+        app:layout_constraintBottom_toTopOf="@+id/settingsCity"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/output_text_view" />
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:fontFamily="sans-serif-black"
+        app:layout_constraintTop_toBottomOf="@+id/foreground_only_location_button"
+        app:layout_constraintVertical_bias="0.04" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
