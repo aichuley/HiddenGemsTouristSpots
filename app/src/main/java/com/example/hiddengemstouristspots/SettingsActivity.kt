@@ -186,10 +186,15 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
 
     fun get_city(): String{
         val city2 = findViewById<TextInputEditText>(R.id.settingsCity)
-
         val city1 = findViewById<TextView>(R.id.output_text_view)
 
         if(city2 == null){
+           // DemoClass.data = Location(city1.toString())
+            var gc = Geocoder(this, Locale.getDefault())
+            var addresses = gc.getFromLocationName(city1.toString(), 2)
+            var address = addresses[0]
+            DemoClass.lat = address.latitude
+            DemoClass.long = address.longitude
             return city1.toString()
         }
         return city2.toString()
@@ -296,11 +301,12 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
             if (location != null) {
                 var x = location.latitude
                 var y = location.longitude
-
+               // DemoClass.data = location
+                DemoClass.lat = x
+                DemoClass.long = y
                 var geocoder = Geocoder(this@SettingsActivity, Locale.getDefault())
                 val addresses: List<Address> = geocoder.getFromLocation(x, y, 1)
                 var cityName = addresses[0].getAddressLine(0)
-
                 logResultsToScreen(cityName)
                 //${location.toText()}
             }

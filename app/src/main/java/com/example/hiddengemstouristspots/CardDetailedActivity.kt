@@ -1,5 +1,6 @@
 package com.example.hiddengemstouristspots
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hiddengemstouristspots.adapter.DogCardAdapter
@@ -9,12 +10,15 @@ import com.example.hiddengemstouristspots.databinding.CardDetailedBinding
 class CardDetailedActivity : AppCompatActivity(){
 
     private lateinit var binding: CardDetailedBinding
+    private lateinit var mapIntent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.card_detailed)
         binding = CardDetailedBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.getDirections.setOnClickListener{ launchMaps() }
 
         val name = getIntent().getStringExtra("NAME")
         val long_summary = getIntent().getStringExtra("LONG_SUMMARY")
@@ -27,5 +31,11 @@ class CardDetailedActivity : AppCompatActivity(){
         if (image_id != null) {
             binding.image.setImageResource(image_id.toInt())
         }
+    }
+
+
+    private fun launchMaps(){
+        mapIntent = Intent(this, MapsActivity::class.java)
+        startActivity(mapIntent)
     }
 }
