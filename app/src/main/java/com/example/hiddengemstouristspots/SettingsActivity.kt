@@ -92,7 +92,6 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
                 foregroundOnlyLocationService?.unsubscribeToLocationUpdates()
             } else {
 
-                // TODO: Step 1.0, Review Permissions: Checks and requests if needed.
                 if (foregroundPermissionApproved()) {
                     foregroundOnlyLocationService?.subscribeToLocationUpdates()
                         ?: Log.d(TAG, "Service Not Bound")
@@ -130,7 +129,6 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
         submit.setOnClickListener {
             scaler()
             var newCity = get_city()
-            TODO()
 //            spotViewModel.changeUserCity(newCity)
         }
 

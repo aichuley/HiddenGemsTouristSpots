@@ -12,4 +12,22 @@
     <string name="view_hidden_gems">Voir les joyaux cachés</string>
     <string name="settings">Réglages</string>
 
+    <string name="launch_activity">lancer l\'activité</string>
+    <string name="location_unknown">Lieu inconnu</string>
+    <string name="location_updates_label">Mises à jour de l\'emplacement</string>
+    <string name="permission_rationale">Autorisation de localisation requise pour les fonctionnalités principales</string>
+    <string name="permission_denied_explanation">L\'autorisation a été refusée, mais elle est nécessaire pour les fonctionnalités de base.</string>
+    <string name="ok">d\'accord</string>
+    <string name="start_location_updates_button_text">Partager votre position avec Hidden Gems ?</string>
+    <string name="stop_location_updates_button_text">Arrêter de partager votre position avec Hidden Gems ?</string>
+    <string name="location_updated">Emplacement mis à jour : %1$s</string>
+    <string name="preference_file_key">com.example.android.while_in_use_location.PREFERENCE_FILE_KEY</string>
+    <string name="no_location_text">Pas d\'emplacement actuel</string>
+    <string name="add_rating">ajouter une note</string>
+    <string name="submit">Soumettre</string>
+    <string name="dark_light_mode">mode sombre/clair</string>
+    <string name="type_a_city">Tapez une ville</string>
+    <string name="or_enter_city">Ou entrez la ville</string>
+    <string name="set_your_city">Définissez votre ville</string>
+
 </resources>
