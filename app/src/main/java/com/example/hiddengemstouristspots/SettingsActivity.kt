@@ -20,11 +20,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.android.whileinuselocation.ForegroundOnlyLocationService
 import com.example.android.whileinuselocation.SharedPreferenceUtil
-import com.example.android.whileinuselocation.toText
 import com.google.android.material.snackbar.Snackbar
 import com.example.hiddengemstouristspots.data.SpotViewModel
 import com.example.hiddengemstouristspots.data.SpotViewModelFactory
@@ -70,6 +70,7 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
             foregroundOnlyLocationServiceBound = false
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -131,6 +132,29 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
             var newCity = get_city()
             TODO()
 //            spotViewModel.changeUserCity(newCity)
+        }
+
+        val appSettingPreferences: SharedPreferences = getSharedPreferences( "AppSettingPreferences", 0)
+        val sharedPrefsEdit: SharedPreferences.Editor = appSettingPreferences.edit()
+        val isNight: Boolean = appSettingPreferences.getBoolean("NightMode", false)
+
+        if(isNight) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
+        var switchBtn = findViewById<Button>(R.id.darkModeSwitch)
+        switchBtn.setOnClickListener {
+            if(isNight) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                sharedPrefsEdit.putBoolean("NightMode", false)
+                sharedPrefsEdit.apply()
+            }else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                sharedPrefsEdit.putBoolean("NightMode", true)
+                sharedPrefsEdit.apply()
+            }
         }
     }
 

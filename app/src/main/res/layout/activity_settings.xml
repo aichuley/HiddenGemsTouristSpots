@@ -71,6 +71,7 @@
 
     <Switch
         android:id="@+id/darkModeSwitch"
+        android:configChanges="uiMode"
         android:layout_width="172dp"
         android:layout_height="51dp"
         android:layout_marginStart="132dp"
