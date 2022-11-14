@@ -1,9 +1,15 @@
 package com.example.hiddengemstouristspots
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -46,9 +52,30 @@ class VerticalListActivity : AppCompatActivity(), RecyclerViewInterface {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.fab.setOnClickListener{
+            rotator()
             val intent = Intent(this@VerticalListActivity, AddRatingActivity::class.java)
             startActivityForResult(intent, newSpotActivityRequestCode)
         }
+    }
+
+    private fun ObjectAnimator.disableViewDuringAnimation(view: View) {
+
+        addListener(object: AnimatorListenerAdapter(){
+            override fun onAnimationStart(animation: Animator?) {
+                view.isEnabled = false
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                view.isEnabled = true
+            }
+        })
+    }
+
+    private fun rotator() {
+        val animator = ObjectAnimator.ofFloat(binding.fab, View.ROTATION, -360f, 0f)
+        animator.duration = 1000
+        animator.disableViewDuringAnimation(binding.fab)
+        animator.start()
     }
 
     override fun onItemClick(position: Int) {
