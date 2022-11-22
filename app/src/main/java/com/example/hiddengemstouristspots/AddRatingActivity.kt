@@ -97,7 +97,7 @@ class AddRatingActivity : AppCompatActivity() {
 
         binding.submitRating.setOnClickListener{
             val replyIntent = Intent()
-            if(binding.cityVal.text.toString().isEmpty() ||  binding.spotVal.text.toString().isEmpty() || binding.reviewVal.text.toString().isEmpty()){
+            if(binding.ratingScore.text.toString().isEmpty() || binding.cityVal.text.toString().isEmpty() ||  binding.spotVal.text.toString().isEmpty() || binding.reviewVal.text.toString().isEmpty()){
                 val toast = Toast.makeText(applicationContext, "Please Fill Out All Fields", Toast.LENGTH_LONG)
                 toast.show()
             }
