@@ -24,20 +24,24 @@ class AddRatingActivity : AppCompatActivity() {
 
     private lateinit var binding: AddRatingBinding
     private lateinit var newImage: Uri
+    private var usedDefaultImg = false
 
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result ->
+
         if(result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            binding.previewImage.setImageURI(data?.data)
-            newImage = data?.data!!
+            if(!usedDefaultImg) {
+                val data: Intent? = result.data
+                binding.previewImage.setImageURI(data?.data)
+                newImage = data?.data!!
 
-            val contentResolver = applicationContext.contentResolver
+                val contentResolver = applicationContext.contentResolver
 
-            val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                        Intent.FLAG_GRANT_WRITE_URI_PERMISSION
 // Check for the freshest data.
-            contentResolver.takePersistableUriPermission(newImage, takeFlags)
+                contentResolver.takePersistableUriPermission(newImage, takeFlags)
+            }
         }
     }
 
@@ -75,7 +79,7 @@ class AddRatingActivity : AppCompatActivity() {
             return binding.reviewVal.text.toString()
         }
 
-         fun ObjectAnimator.disableViewDuringAnimation(view: View) {
+        fun ObjectAnimator.disableViewDuringAnimation(view: View) {
 
             addListener(object: AnimatorListenerAdapter(){
                 override fun onAnimationStart(animation: Animator?) {
@@ -96,11 +100,26 @@ class AddRatingActivity : AppCompatActivity() {
         }
 
         binding.submitRating.setOnClickListener{
+
             val replyIntent = Intent()
-            if(binding.ratingScore.text.toString().isEmpty() || binding.cityVal.text.toString().isEmpty() ||  binding.spotVal.text.toString().isEmpty() || binding.reviewVal.text.toString().isEmpty()){
-                val toast = Toast.makeText(applicationContext, "Please Fill Out All Fields", Toast.LENGTH_LONG)
+            if(binding.ratingScore.text.toString().isEmpty()){
+                val toast = Toast.makeText(applicationContext, "Please add a valid rating between 0 and 5", Toast.LENGTH_LONG)
+                toast.show()
+
+            }
+            if( binding.cityVal.text.toString().isEmpty()){
+                val toast = Toast.makeText(applicationContext, "Please add a valid city name", Toast.LENGTH_LONG)
+                toast.show()
+
+            }
+            if(  binding.spotVal.text.toString().isEmpty()){
+                val toast = Toast.makeText(applicationContext, "Please add a valid spot name", Toast.LENGTH_LONG)
+                toast.show()}
+            if( binding.reviewVal.text.toString().isEmpty()){
+                val toast = Toast.makeText(applicationContext, "Please add a valid review ", Toast.LENGTH_LONG)
                 toast.show()
             }
+
             else{
                 rotater()
                 val rating = get_rating()
@@ -118,8 +137,18 @@ class AddRatingActivity : AppCompatActivity() {
                 }
 
 
-                replyIntent.putExtra("IMAGE_ID", 0)
-                replyIntent.putExtra("IMAGE_URI", newImage.toString())
+                if(binding.previewImage.getDrawable() == null){
+                    //Image From: https://www.discover-the-world.com/study-trips/blog/4-destinations-4-reasons/
+                    binding.previewImage.setImageResource(R.drawable.touristdefault)
+                    replyIntent.putExtra("IMAGE_ID", R.drawable.touristdefault)
+                    replyIntent.putExtra("IMAGE_URI", "")
+                    usedDefaultImg = true
+                }
+                else{
+                    replyIntent.putExtra("IMAGE_ID", 0)
+                    replyIntent.putExtra("IMAGE_URI", newImage.toString())
+                }
+
                 replyIntent.putExtra("NAME", experienceName)
                 replyIntent.putExtra("SHORT_REVIEW", shortened)
                 replyIntent.putExtra("RATING", rating.toString())

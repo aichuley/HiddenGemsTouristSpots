@@ -51,6 +51,7 @@ public abstract class SpotRoomDatabase : RoomDatabase() {
 
         suspend fun populateDatabase(spotDao: SpotDAO) {
             var spot = Spot(
+                //image from: https://www.utexas.edu/about/overview
                 R.drawable.maincampus_hero,
                 "",
                 "UT Austin",
@@ -61,6 +62,7 @@ public abstract class SpotRoomDatabase : RoomDatabase() {
             )
             spotDao.insert(spot)
             spot = Spot(
+                //image from: https://www.istockphoto.com/photos/zilker-park
                 R.drawable.zilker_park,
                 "",
                 "Zilker Metropolitan Park",
@@ -71,6 +73,7 @@ public abstract class SpotRoomDatabase : RoomDatabase() {
             )
             spotDao.insert(spot)
             spot = Spot(
+                //image from: https://www.gettyimages.ca/photos/texas-state-capitol-building
                 R.drawable.capitol,
                 "",
                 "Texas Capitol",
@@ -81,6 +84,7 @@ public abstract class SpotRoomDatabase : RoomDatabase() {
             )
             spotDao.insert(spot)
             spot = Spot(
+                //image from: https://elanatsui.art/collections/blanton-museum-of-art
                 R.drawable.blanton,
                 "",
                 "Blanton Museum of Art",
