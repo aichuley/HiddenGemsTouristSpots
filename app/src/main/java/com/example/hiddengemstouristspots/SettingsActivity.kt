@@ -238,7 +238,7 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
             foregroundOnlyLocationButton.text = getString(R.string.start_location_updates_button_text)
         }
     }
-    
+
 
     private fun foregroundPermissionApproved(): Boolean {
         return PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(

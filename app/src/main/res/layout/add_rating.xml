@@ -57,14 +57,13 @@
         app:layout_constraintTop_toBottomOf="@+id/previewImage"
         app:layout_constraintVertical_bias="0.134" />
 
-    <EditText
-        android:id="@+id/rating_score"
+        <EditText
+        android:id="@+id/spotVal"
         android:layout_width="229dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="8dp"
-        android:hint="Enter a value between 0 and 5"
-        android:inputType="number"
+        android:hint="Type a name"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/get_city"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +71,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rating_name" />
 
-    <TextView
+        <TextView
         android:id="@+id/get_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,24 +84,24 @@
         app:layout_constraintBottom_toTopOf="@+id/cityVal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rating_score" />
+        app:layout_constraintTop_toBottomOf="@+id/spotVal" />
 
-    <EditText
-        android:id="@+id/reviewVal"
-        android:layout_width="242dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="1dp"
-        android:hint="Type a review"
-        android:inputType="text"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/submit_rating"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/get_review" />
+        <EditText
+            android:id="@+id/cityVal"
+            android:layout_width="213dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Enter a US City"
+            android:inputType="text"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/get_review"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/get_city" />
 
-    <TextView
+        <TextView
         android:id="@+id/get_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -118,37 +117,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cityVal" />
 
-    <EditText
-        android:id="@+id/spotVal"
-        android:layout_width="236dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="10dp"
-        android:hint="Enter Name of Tourist Spot"
-        android:inputType="text"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/rating_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enter_name_text" />
+        <EditText
+            android:id="@+id/reviewVal"
+            android:layout_width="242dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="1dp"
+            android:hint="Type a review"
+            android:inputType="text"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/submit_rating"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/get_review" />
 
-    <EditText
-        android:id="@+id/cityVal"
-        android:layout_width="213dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="4dp"
-        android:hint="Enter a US City"
-        android:inputType="text"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/get_review"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/get_city" />
-
-    <TextView
+        <TextView
         android:id="@+id/rating_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -158,13 +142,20 @@
         android:text="Enter rating:"
         android:textSize="20dp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/rating_score"
+        app:layout_constraintBottom_toTopOf="@+id/spotVal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spotVal" />
 
-    <Button
+        <RatingBar
+            android:id="@+id/rating_stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize=".5" />
+
+        <Button
         android:id="@+id/submit_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -178,6 +169,8 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reviewVal" />
+
+
 
     </LinearLayout>
 

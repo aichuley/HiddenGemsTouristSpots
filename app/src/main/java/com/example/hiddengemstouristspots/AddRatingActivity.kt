@@ -5,8 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Intent
-import android.content.res.Resources
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -14,6 +12,7 @@ import android.text.InputFilter
 import android.text.Spanned
 import android.view.View
 import android.widget.EditText
+import android.widget.RatingBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -52,7 +51,7 @@ class AddRatingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val editText = findViewById<EditText>(R.id.rating_score)
+        val editText = findViewById<EditText>(R.id.spotVal)
 
         // Assigning filters
         editText.filters = arrayOf<InputFilter>(MinMaxFilter(0, 5))
@@ -62,13 +61,6 @@ class AddRatingActivity : AppCompatActivity() {
             resultLauncher.launch(intent)
         }
 
-
-        fun get_rating(): Int{
-            val stringInTextField = binding.ratingScore.text.toString()
-            val rating = stringInTextField.toInt()
-            return rating
-
-        }
         fun get_city(): String{
             return binding.cityVal.text.toString()
         }
@@ -99,14 +91,16 @@ class AddRatingActivity : AppCompatActivity() {
             animator.start()
         }
 
+        val ratingRatingBar: RatingBar = binding.ratingStars
+
         binding.submitRating.setOnClickListener{
 
             val replyIntent = Intent()
-            if(binding.ratingScore.text.toString().isEmpty()){
-                val toast = Toast.makeText(applicationContext, "Please add a valid rating between 0 and 5", Toast.LENGTH_LONG)
-                toast.show()
-
-            }
+//            if(binding.ratingScore.text.toString().isEmpty()){
+//                val toast = Toast.makeText(applicationContext, "Please add a valid rating between 0 and 5", Toast.LENGTH_LONG)
+//                toast.show()
+//
+//            }
             if( binding.cityVal.text.toString().isEmpty()){
                 val toast = Toast.makeText(applicationContext, "Please add a valid city name", Toast.LENGTH_LONG)
                 toast.show()
@@ -122,7 +116,7 @@ class AddRatingActivity : AppCompatActivity() {
 
             else{
                 rotater()
-                val rating = get_rating()
+                val rating = ratingRatingBar.rating
                 val city = get_city()
                 val experienceName = get_place()
                 val review = get_review()
