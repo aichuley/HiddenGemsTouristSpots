@@ -18,6 +18,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -29,6 +30,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.example.hiddengemstouristspots.data.SpotViewModel
 import com.example.hiddengemstouristspots.data.SpotViewModelFactory
 import com.example.hiddengemstouristspots.data.SpotsApplication
+import com.example.hiddengemstouristspots.databinding.ActivitySettingsBinding
 import com.google.android.material.textfield.TextInputEditText
 import java.util.*
 
@@ -71,10 +73,13 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
         }
     }
 
+    private lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         foregroundOnlyBroadcastReceiver = ForegroundOnlyBroadcastReceiver()
 
@@ -102,7 +107,8 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
         }
 
 
-        var submit = findViewById<Button>(R.id.submitNewCity)
+        var submit = binding.submitNewCity
+            //findViewById<Button>(R.id.submitNewCity)
         fun ObjectAnimator.disableViewDuringAnimation(view: View) {
 
             addListener(object: AnimatorListenerAdapter(){
@@ -128,8 +134,30 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
         //on submit do animation and set the new city value
         submit.setOnClickListener {
             scaler()
-            var newCity = get_city()
-//            spotViewModel.changeUserCity(newCity)
+            val city1 = binding.settingsCity.text.toString()
+            val city2 = binding.outputTextView.text
+
+            if(!city1.equals("")){
+                //use city1
+            }else{
+                //use city2
+            }
+
+            if(city1.equals("") && city2.equals("")) {
+                Toast.makeText(
+                    applicationContext,
+                    "Please share or add a city.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }else{
+                Toast.makeText(
+                    applicationContext,
+                    "City submitted!",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+
         }
 
         val appSettingPreferences: SharedPreferences = getSharedPreferences( "AppSettingPreferences", 0)
@@ -210,17 +238,7 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
             foregroundOnlyLocationButton.text = getString(R.string.start_location_updates_button_text)
         }
     }
-
-    fun get_city(): String{
-        val city2 = findViewById<TextInputEditText>(R.id.settingsCity)
-
-        val city1 = findViewById<TextView>(R.id.output_text_view)
-
-        if(city2 == null){
-            return city1.toString()
-        }
-        return city2.toString()
-    }
+    
 
     private fun foregroundPermissionApproved(): Boolean {
         return PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(
