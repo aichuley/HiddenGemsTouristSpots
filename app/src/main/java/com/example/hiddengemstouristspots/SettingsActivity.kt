@@ -13,6 +13,8 @@ import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
+import android.preference.PreferenceManager
+import android.preference.PreferenceManager.getDefaultSharedPreferences
 import android.provider.Settings
 import android.util.Log
 import android.view.View
@@ -38,7 +40,7 @@ private const val TAG = "SettingsActivity"
 private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
 
 
-class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val spotViewModel: SpotViewModel by viewModels {
         SpotViewModelFactory((application as SpotsApplication).repository)
@@ -81,6 +83,8 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = "Hidden Gems"
+
         foregroundOnlyBroadcastReceiver = ForegroundOnlyBroadcastReceiver()
 
         sharedPreferences =
@@ -91,7 +95,8 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
 
         foregroundOnlyLocationButton.setOnClickListener {
             val enabled = sharedPreferences.getBoolean(
-                SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false)
+                SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false
+            )
 
             if (enabled) {
                 foregroundOnlyLocationService?.unsubscribeToLocationUpdates()
@@ -108,10 +113,11 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
 
 
         var submit = binding.submitNewCity
-            //findViewById<Button>(R.id.submitNewCity)
+
+        //findViewById<Button>(R.id.submitNewCity)
         fun ObjectAnimator.disableViewDuringAnimation(view: View) {
 
-            addListener(object: AnimatorListenerAdapter(){
+            addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationStart(animation: Animator?) {
                     view.isEnabled = false
                 }
@@ -121,7 +127,8 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
                 }
             })
         }
-         fun scaler() {
+
+        fun scaler() {
             val scalex = PropertyValuesHolder.ofFloat(View.SCALE_X, 2f)
             val scaley = PropertyValuesHolder.ofFloat(View.SCALE_Y, 2f)
             val animator = ObjectAnimator.ofPropertyValuesHolder(submit, scalex, scaley)
@@ -131,25 +138,35 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
             animator.start()
         }
 
+        val appSettingPreferences: SharedPreferences = getSharedPreferences( "AppSettingPreferences", 0)
+        val sharedPrefsEdit: SharedPreferences.Editor = appSettingPreferences.edit()
+
+
         //on submit do animation and set the new city value
         submit.setOnClickListener {
             scaler()
             val city1 = binding.settingsCity.text.toString()
-            val city2 = binding.outputTextView.text
+            val city2 = binding.outputTextView.text.toString()
 
-            if(!city1.equals("")){
-                //use city1
-            }else{
-                //use city2
+            if (city1 != "") {
+                // set city to city1
+                sharedPrefsEdit.putString("city", city1)
+                sharedPrefsEdit.apply()
+                Log.d("cityName", "new city is ${appSettingPreferences.getString("city", "wrong")}")
+            } else {
+                // set city to city2
+                sharedPrefsEdit.putString("city", city2)
+                sharedPrefsEdit.apply()
+                Log.d("cityName", "new city is ${appSettingPreferences.getString("city", "wrong")}")
             }
 
-            if(city1.equals("") && city2.equals("")) {
+            if (city1 == "" && city2 == "") {
                 Toast.makeText(
                     applicationContext,
                     "Please share or add a city.",
                     Toast.LENGTH_LONG
                 ).show()
-            }else{
+            } else {
                 Toast.makeText(
                     applicationContext,
                     "City submitted!",
@@ -160,23 +177,21 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
 
         }
 
-        val appSettingPreferences: SharedPreferences = getSharedPreferences( "AppSettingPreferences", 0)
-        val sharedPrefsEdit: SharedPreferences.Editor = appSettingPreferences.edit()
         val isNight: Boolean = appSettingPreferences.getBoolean("NightMode", false)
 
-        if(isNight) {
+        if (isNight) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }else{
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
         var switchBtn = findViewById<Button>(R.id.darkModeSwitch)
         switchBtn.setOnClickListener {
-            if(isNight) {
+            if (isNight) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 sharedPrefsEdit.putBoolean("NightMode", false)
                 sharedPrefsEdit.apply()
-            }else{
+            } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 sharedPrefsEdit.putBoolean("NightMode", true)
                 sharedPrefsEdit.apply()
@@ -201,8 +216,10 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
         LocalBroadcastManager.getInstance(this).registerReceiver(
             foregroundOnlyBroadcastReceiver,
             IntentFilter(
-                ForegroundOnlyLocationService.ACTION_FOREGROUND_ONLY_LOCATION_BROADCAST)
+                ForegroundOnlyLocationService.ACTION_FOREGROUND_ONLY_LOCATION_BROADCAST
+            )
         )
+
     }
 
     override fun onPause() {
@@ -225,17 +242,21 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         // Updates button states if new while in use location is added to SharedPreferences.
         if (key == SharedPreferenceUtil.KEY_FOREGROUND_ENABLED) {
-            updateButtonState(sharedPreferences.getBoolean(
-                SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false)
+            updateButtonState(
+                sharedPreferences.getBoolean(
+                    SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false
+                )
             )
         }
     }
 
     private fun updateButtonState(trackingLocation: Boolean) {
         if (trackingLocation) {
-            foregroundOnlyLocationButton.text = getString(R.string.stop_location_updates_button_text)
+            foregroundOnlyLocationButton.text =
+                getString(R.string.stop_location_updates_button_text)
         } else {
-            foregroundOnlyLocationButton.text = getString(R.string.start_location_updates_button_text)
+            foregroundOnlyLocationButton.text =
+                getString(R.string.start_location_updates_button_text)
         }
     }
 
@@ -248,7 +269,7 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
     }
 
     private fun logResultsToScreen(output: String) {
-       // val outputWithPreviousLogs = "$output\n${outputTextView.text}"
+        // val outputWithPreviousLogs = "$output\n${outputTextView.text}"
         outputTextView.text = output
     }
 
@@ -344,9 +365,9 @@ class SettingsActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenc
 
                 var geocoder = Geocoder(this@SettingsActivity, Locale.getDefault())
                 val addresses: List<Address> = geocoder.getFromLocation(x, y, 1)
-                var cityName = addresses[0].getAddressLine(0)
+                var cityName = addresses.get(0).getAddressLine(0)
 
-                logResultsToScreen(cityName)
+                logResultsToScreen(cityName.split(",").get(1))
                 //${location.toText()}
             }
         }

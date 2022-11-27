@@ -1,90 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fillViewport="true">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
     tools:context=".AddRatingActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/selectImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="9dp"
-        android:text="Select image"
-        app:layout_constraintBottom_toTopOf="@+id/previewImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/selectImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="9dp"
+            android:text="@string/select_image"
+            app:layout_constraintBottom_toTopOf="@+id/previewImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/previewImage"
-        android:layout_width="125dp"
-        android:layout_height="107dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:importantForAccessibility="no"
-        app:layout_constraintBottom_toTopOf="@+id/enter_name_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectImageButton" />
-
-    <TextView
-        android:id="@+id/enter_name_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Enter Experience name"
-        android:textSize="20dp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/spotVal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/previewImage"
-        app:layout_constraintVertical_bias="0.134" />
-
-        <EditText
-        android:id="@+id/spotVal"
-        android:layout_width="229dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="8dp"
-        android:hint="Type a name"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/get_city"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rating_name" />
+        <ImageView
+            android:id="@+id/previewImage"
+            android:layout_width="125dp"
+            android:layout_height="107dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toTopOf="@+id/enter_name_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectImageButton" />
 
         <TextView
-        android:id="@+id/get_city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Enter City:"
-        android:textSize="20dp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/cityVal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spotVal" />
+            android:id="@+id/enter_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/enter_experience_name"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/spotVal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/previewImage"
+            app:layout_constraintVertical_bias="0.134" />
+
+        <EditText
+            android:id="@+id/spotVal"
+            android:layout_width="229dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:hint="@string/type_a_name"
+            android:inputType="text"
+            android:importantForAutofill="no"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/get_city"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rating_name" />
+
+        <TextView
+            android:id="@+id/get_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/enter_city"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/cityVal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spotVal" />
 
         <EditText
             android:id="@+id/cityVal"
@@ -102,20 +104,20 @@
             app:layout_constraintTop_toBottomOf="@+id/get_city" />
 
         <TextView
-        android:id="@+id/get_review"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Enter Review"
-        android:textSize="20dp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/reviewVal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cityVal" />
+            android:id="@+id/get_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Enter Review"
+            android:textSize="20dp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/reviewVal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityVal" />
 
         <EditText
             android:id="@+id/reviewVal"
@@ -133,20 +135,20 @@
             app:layout_constraintTop_toBottomOf="@+id/get_review" />
 
         <TextView
-        android:id="@+id/rating_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Enter rating:"
-        android:textSize="20dp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/spotVal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spotVal" />
+            android:id="@+id/rating_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Enter rating:"
+            android:textSize="20dp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/spotVal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spotVal" />
 
         <RatingBar
             android:id="@+id/rating_stars"
@@ -156,20 +158,19 @@
             android:stepSize=".5" />
 
         <Button
-        android:id="@+id/submit_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="21dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Submit"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reviewVal" />
-
+            android:id="@+id/submit_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="21dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Submit"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reviewVal" />
 
 
     </LinearLayout>

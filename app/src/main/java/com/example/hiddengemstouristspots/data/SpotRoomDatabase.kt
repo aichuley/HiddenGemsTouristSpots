@@ -14,6 +14,7 @@ public abstract class SpotRoomDatabase : RoomDatabase() {
 
     abstract fun spotDao(): SpotDAO
 
+
     companion object {
         // Singleton prevents multiple instances of database opening at the
         // same time.
@@ -56,8 +57,8 @@ public abstract class SpotRoomDatabase : RoomDatabase() {
                 "",
                 "UT Austin",
                 "College of Texas",
-                "5/5 stars",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                "5/5",
+                "The University of Texas at Austin is a public research university in Austin, Texas. It was founded in 1883 and is the oldest institution in the University of Texas System."
                 , "Austin"
             )
             spotDao.insert(spot)
@@ -67,8 +68,8 @@ public abstract class SpotRoomDatabase : RoomDatabase() {
                 "",
                 "Zilker Metropolitan Park",
                 "Sprawling green...",
-                "4.8/5 stars",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                "4/5",
+                "Zilker Metropolitan Park is a recreational area in south Austin, Texas at the juncture of Barton Creek and the Colorado River that comprises over 350 acres of publicly owned land. It is named after its benefactor, Andrew Jackson Zilker, who donated the land to the city in 1917."
                 , "Austin"
             )
             spotDao.insert(spot)
@@ -78,8 +79,8 @@ public abstract class SpotRoomDatabase : RoomDatabase() {
                 "",
                 "Texas Capitol",
                 "Home to the state...",
-                "4.7/5 stars",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                "4.5/5",
+                "The Texas State Capitol is the capitol and seat of government of the American state of Texas. Located in downtown Austin, Texas, the structure houses the offices and chambers of the Texas Legislature and of the Governor of Texas."
                 , "Austin"
             )
             spotDao.insert(spot)
@@ -89,9 +90,9 @@ public abstract class SpotRoomDatabase : RoomDatabase() {
                 "",
                 "Blanton Museum of Art",
                 "Art collection of...",
-                "4.6/5 stars",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                , "Austin"
+                "4.5/5",
+                "The Jack S. Blanton Museum of Art at the University of Texas at Austin is one of the largest university art museums in the U.S. with 189,340 square feet devoted to temporary exhibitions, permanent collection galleries, storage, administrative offices, classrooms, a print study room, an auditorium, shop, and cafe.",
+                "Austin"
             )
             spotDao.insert(spot)
         }

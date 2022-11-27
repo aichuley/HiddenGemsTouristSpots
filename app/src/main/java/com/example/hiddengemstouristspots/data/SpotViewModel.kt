@@ -18,6 +18,12 @@ class SpotViewModel(private val repository: SpotRepository) : ViewModel() {
     fun insert(spot: Spot) = viewModelScope.launch {
         repository.insert(spot)
     }
+
+
+
+    fun getFilteredSpots(cityName: String): LiveData<List<Spot>>  {
+        return repository.getFilteredSpots(cityName).asLiveData()
+    }
 }
 
 class SpotViewModelFactory(private val repository: SpotRepository) : ViewModelProvider.Factory {

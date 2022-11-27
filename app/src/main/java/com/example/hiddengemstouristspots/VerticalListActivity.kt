@@ -6,8 +6,11 @@ import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -31,15 +34,17 @@ class VerticalListActivity : AppCompatActivity(), RecyclerViewInterface {
         SpotViewModelFactory((application as SpotsApplication).repository)
     }
 
+    private val adapter = SpotCardAdapter(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityVerticalListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val adapter = SpotCardAdapter(this)
         binding.verticalRecyclerView.adapter = adapter
 
+        supportActionBar?.title = "Hidden Gems"
+
         spotViewModel.allSpots.observe(this, Observer { spots ->
-            // Update the cached copy of the words in the adapter.
             spots?.let { adapter.submitList(it) }
             data = adapter.currentList
         })
@@ -51,16 +56,35 @@ class VerticalListActivity : AppCompatActivity(), RecyclerViewInterface {
         // Enable up button for backward navigation
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.fab.setOnClickListener{
+        binding.fab.setOnClickListener {
             rotator()
             val intent = Intent(this@VerticalListActivity, AddRatingActivity::class.java)
             startActivityForResult(intent, newSpotActivityRequestCode)
+        }
+        binding.filterSwitch.setOnClickListener{
+            if(binding.filterSwitch.isChecked) {
+                Log.d("switch", "switch is enabled")
+                val appSettingPreferences: SharedPreferences = getSharedPreferences( "AppSettingPreferences", 0)
+                val cityName = appSettingPreferences.getString("city", "Austin")
+                Log.d("city", cityName.toString())
+                spotViewModel.getFilteredSpots(cityName = cityName!!).observe(this) { spots ->
+                    spots?.let { adapter.submitList(it) }
+                    data = adapter.currentList
+                }
+            }
+            else {
+                Log.d("switch", "switch is disabled")
+                spotViewModel.allSpots.observe(this, Observer { spots ->
+                    spots?.let { adapter.submitList(it) }
+                    data = adapter.currentList
+                })
+            }
         }
     }
 
     private fun ObjectAnimator.disableViewDuringAnimation(view: View) {
 
-        addListener(object: AnimatorListenerAdapter(){
+        addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator?) {
                 view.isEnabled = false
             }
@@ -79,13 +103,13 @@ class VerticalListActivity : AppCompatActivity(), RecyclerViewInterface {
     }
 
     override fun onItemClick(position: Int) {
+//        getList()
         itemIntent = Intent(this, CardDetailedActivity::class.java)
 
-        if(data.get(position).imageResourceId > 0){
+        if (data.get(position).imageResourceId > 0) {
             itemIntent.putExtra("IMAGE_URI", "")
             itemIntent.putExtra("IMAGE_ID", data.get(position).imageResourceId)
-        }
-        else{
+        } else {
             itemIntent.putExtra("IMAGE_ID", 0)
             itemIntent.putExtra("IMAGE_URI", data.get(position).imageUri)
         }
@@ -100,6 +124,8 @@ class VerticalListActivity : AppCompatActivity(), RecyclerViewInterface {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)
+
+        print("returned from activity")
 
         if (requestCode == newSpotActivityRequestCode && resultCode == Activity.RESULT_OK) {
             var imageResourceId = 0
@@ -123,6 +149,7 @@ class VerticalListActivity : AppCompatActivity(), RecyclerViewInterface {
             }
             intentData?.getStringExtra("RATING")?.let { reply ->
                 rating = reply
+                rating += "/5"
             }
             intentData?.getStringExtra("LONG_REVIEW")?.let { reply ->
                 long_summary = reply
@@ -142,4 +169,32 @@ class VerticalListActivity : AppCompatActivity(), RecyclerViewInterface {
             ).show()
         }
     }
+
+    // new method called get list that checks if filtering is turned on
+    // if its not, it returns allSpots, other wise it get filteredSpots
+    // changes lines 44 and 85
+//    fun getList() {
+//
+//        val appSettingPreferences: SharedPreferences =
+//            getSharedPreferences("AppSettingPreferences", 0)
+//
+//        if(filteringOn) {
+//            Log.d("filtering", "filtering is on")
+//            val cityName = appSettingPreferences.getString("city", "Austin")
+//            spotViewModel.getFilteredSpots(cityName = cityName!!).observe(this) { spots ->
+//                spots?.let { adapter.submitList(it) }
+//                data = adapter.currentList
+//            }
+//
+//        }
+//        else {
+//            Log.d("filtering", "filtering is off")
+//            spotViewModel.allSpots.observe(this, Observer { spots ->
+//                spots?.let { adapter.submitList(it) }
+//                data = adapter.currentList
+//            })
+//        }
+//
+//
+//    }
 }

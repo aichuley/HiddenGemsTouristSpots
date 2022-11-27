@@ -49,12 +49,13 @@ class AddRatingActivity : AppCompatActivity() {
         setContentView(R.layout.add_rating)
         binding = AddRatingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "Hidden Gems"
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val editText = findViewById<EditText>(R.id.spotVal)
 
         // Assigning filters
-        editText.filters = arrayOf<InputFilter>(MinMaxFilter(0, 5))
+//        editText.filters = arrayOf<InputFilter>(MinMaxFilter(0, 5))
 
         binding.selectImageButton.setOnClickListener{
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
@@ -91,7 +92,7 @@ class AddRatingActivity : AppCompatActivity() {
             animator.start()
         }
 
-        val ratingRatingBar: RatingBar = binding.ratingStars
+        val ratingRatingBar = binding.ratingStars
 
         binding.submitRating.setOnClickListener{
 
@@ -150,6 +151,7 @@ class AddRatingActivity : AppCompatActivity() {
                 replyIntent.putExtra("CITY", city)
                 setResult(Activity.RESULT_OK, replyIntent)
                 finish()
+
 
             }
 

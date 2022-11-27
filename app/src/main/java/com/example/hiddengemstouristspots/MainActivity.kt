@@ -21,11 +21,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // Setup view binding
 
-
-
-
+        supportActionBar?.title = "Hidden Gems"
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -13,4 +13,8 @@ interface SpotDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(spot: Spot)
+
+    @Query("SELECT * FROM spot_table WHERE city = :cityName")
+    fun getFilteredSpots(cityName: String): Flow<List<Spot>>
+
 }

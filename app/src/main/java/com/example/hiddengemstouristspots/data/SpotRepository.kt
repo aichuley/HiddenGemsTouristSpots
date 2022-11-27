@@ -17,4 +17,9 @@ class SpotRepository(private val spotDao: SpotDAO) {
     suspend fun insert(spot: Spot) {
         spotDao.insert(spot)
     }
+
+    @WorkerThread
+    fun getFilteredSpots(cityName: String): Flow<List<Spot>> {
+        return spotDao.getFilteredSpots(cityName)
+    }
 }

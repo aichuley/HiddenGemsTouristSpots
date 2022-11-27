@@ -18,6 +18,8 @@ class CardDetailedActivity : AppCompatActivity(){
         binding = CardDetailedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = "Hidden Gems"
+
         val name = getIntent().getStringExtra("NAME")
         val long_summary = getIntent().getStringExtra("LONG_REVIEW")
         val rating = getIntent().getStringExtra("RATING")
