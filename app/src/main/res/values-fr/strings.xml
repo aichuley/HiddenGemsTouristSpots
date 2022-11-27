@@ -30,4 +30,16 @@
     <string name="or_enter_city">Ou entrez la ville</string>
     <string name="set_your_city">Définissez votre ville</string>
 
+    <string name="enter_experience_name">Entrez le nom de l\'expérience</string>
+    <string name="type_a_name">Tapez un nom</string>
+    <string name="enter_city">Entrez la ville :</string>
+    <string name="filter_by_city">Filtrer par ville :</string>
+    <string name="share_location_with_hidden_gems">Partager l\'emplacement avec Hidden Gems ?</string>
+    <string name="icon_of_a_musical_note">Icône d\'une note de musique</string>
+    <string name="enter_a_us_city">Entrez une ville américaine</string>
+    <string name="enter_review">Entrez l\'examen</string>
+    <string name="type_a_review">Tapez un avis</string>
+    <string name="enter_rating">Saisissez la note :</string>
+    <string name="more_info">Plus d\'informations</string>
+
 </resources>
