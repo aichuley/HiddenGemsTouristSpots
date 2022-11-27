@@ -270,7 +270,7 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
 
     private fun logResultsToScreen(output: String) {
         // val outputWithPreviousLogs = "$output\n${outputTextView.text}"
-        outputTextView.text = output
+        outputTextView.text = "Current location: $output"
     }
 
     private fun requestForegroundPermissions() {
