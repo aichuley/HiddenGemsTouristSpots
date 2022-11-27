@@ -94,14 +94,15 @@
             android:layout_height="48dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="4dp"
-            android:hint="Enter a US City"
+            android:hint="@string/enter_a_us_city"
             android:inputType="text"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/get_review"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/get_city" />
+            app:layout_constraintTop_toBottomOf="@+id/get_city"
+            android:importantForAutofill="no" />
 
         <TextView
             android:id="@+id/get_review"
@@ -110,8 +111,8 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif-black"
-            android:text="Enter Review"
-            android:textSize="20dp"
+            android:text="@string/enter_review"
+            android:textSize="20sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/reviewVal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,14 +126,15 @@
             android:layout_height="48dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="1dp"
-            android:hint="Type a review"
+            android:hint="@string/type_a_review"
             android:inputType="text"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/submit_rating"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/get_review" />
+            app:layout_constraintTop_toBottomOf="@+id/get_review"
+            android:importantForAutofill="no" />
 
         <TextView
             android:id="@+id/rating_name"
@@ -141,8 +143,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif-black"
-            android:text="Enter rating:"
-            android:textSize="20dp"
+            android:text="@string/enter_rating"
+            android:textSize="20sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/spotVal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -164,7 +166,7 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="21dp"
             android:fontFamily="sans-serif-black"
-            android:text="Submit"
+            android:text="@string/submit"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
