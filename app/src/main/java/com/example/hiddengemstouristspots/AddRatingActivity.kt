@@ -95,27 +95,25 @@ class AddRatingActivity : AppCompatActivity() {
         val ratingRatingBar = binding.ratingStars
 
         binding.submitRating.setOnClickListener{
-
+            var allFilled = true;
             val replyIntent = Intent()
-//            if(binding.ratingScore.text.toString().isEmpty()){
-//                val toast = Toast.makeText(applicationContext, "Please add a valid rating between 0 and 5", Toast.LENGTH_LONG)
-//                toast.show()
-//
-//            }
+
             if( binding.cityVal.text.toString().isEmpty()){
                 val toast = Toast.makeText(applicationContext, "Please add a valid city name", Toast.LENGTH_LONG)
                 toast.show()
-
+                allFilled = false
             }
             if(  binding.spotVal.text.toString().isEmpty()){
                 val toast = Toast.makeText(applicationContext, "Please add a valid spot name", Toast.LENGTH_LONG)
-                toast.show()}
+                toast.show()
+                allFilled = false
+            }
             if( binding.reviewVal.text.toString().isEmpty()){
                 val toast = Toast.makeText(applicationContext, "Please add a valid review ", Toast.LENGTH_LONG)
                 toast.show()
+                allFilled = false
             }
-
-            else{
+            if(allFilled){
                 rotater()
                 val rating = ratingRatingBar.rating
                 val city = get_city()
