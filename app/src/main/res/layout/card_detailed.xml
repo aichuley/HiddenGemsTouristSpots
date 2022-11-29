@@ -60,6 +60,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rating"
             tools:text="test"/>
+
         <Button
             android:id="@+id/get_directions"
             android:layout_width="wrap_content"
@@ -69,6 +70,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/long_description" />
+
+        <Button
+            android:id="@+id/get_directions2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/get_dirs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/long_description"
+            tools:text="Directions" />
 
     </LinearLayout>
 

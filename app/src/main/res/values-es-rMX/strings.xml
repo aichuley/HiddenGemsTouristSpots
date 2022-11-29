@@ -28,4 +28,5 @@
     <string name="type_a_city">"Ciudad Tipo A "</string>
     <string name="or_enter_city">"O ingrese la ciudad "</string>
     <string name="set_your_city">"Establece tu ciudad "</string>
+    <string name="get_dirs">Obtener las direcciones</string>
 </resources>

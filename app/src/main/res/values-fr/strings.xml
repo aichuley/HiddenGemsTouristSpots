@@ -41,5 +41,6 @@
     <string name="type_a_review">Tapez un avis</string>
     <string name="enter_rating">Saisissez la note :</string>
     <string name="more_info">Plus d\'informations</string>
+    <string name="get_dirs">Obtenir des directions</string>
 
 </resources>

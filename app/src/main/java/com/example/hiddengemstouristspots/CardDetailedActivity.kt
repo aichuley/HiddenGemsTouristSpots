@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hiddengemstouristspots.databinding.CardDetailedBinding
 
@@ -25,6 +26,7 @@ class CardDetailedActivity : AppCompatActivity(){
         val rating = getIntent().getStringExtra("RATING")
         val image_id = getIntent().getIntExtra("IMAGE_ID", -1)
         val imageUri = getIntent().getStringExtra("IMAGE_URI")
+        val city = getIntent().getStringExtra("CITY")
 
         binding.name.setText(name)
         binding.longDescription.setText(long_summary)
@@ -37,6 +39,11 @@ class CardDetailedActivity : AppCompatActivity(){
 
         binding.getDirections.setOnClickListener{
             val queryUrl: Uri = Uri.parse("https://www.google.com/search?q=${name}")
+            val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+            startActivity(intent)
+        }
+        binding.getDirections2.setOnClickListener{
+            val queryUrl: Uri = Uri.parse("https://www.google.com/maps/dir//${name}${city}")
             val intent = Intent(Intent.ACTION_VIEW, queryUrl)
             startActivity(intent)
         }
