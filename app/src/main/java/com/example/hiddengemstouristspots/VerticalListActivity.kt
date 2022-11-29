@@ -103,6 +103,23 @@ class VerticalListActivity : AppCompatActivity(), RecyclerViewInterface {
     }
 
     override fun onItemClick(position: Int) {
+        if(binding.filterSwitch.isChecked) {
+            Log.d("switch", "switch is enabled")
+            val appSettingPreferences: SharedPreferences = getSharedPreferences( "AppSettingPreferences", 0)
+            val cityName = appSettingPreferences.getString("city", "Austin")
+            Log.d("city", cityName.toString())
+            spotViewModel.getFilteredSpots(cityName = cityName!!).observe(this) { spots ->
+                spots?.let { adapter.submitList(it) }
+                data = adapter.currentList
+            }
+        }
+        else {
+            Log.d("switch", "switch is disabled")
+            spotViewModel.allSpots.observe(this, Observer { spots ->
+                spots?.let { adapter.submitList(it) }
+                data = adapter.currentList
+            })
+        }
 //        getList()
         itemIntent = Intent(this, CardDetailedActivity::class.java)
 
